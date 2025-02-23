@@ -58,7 +58,7 @@ imgGallery.addEventListener("click", handleClick);
 function createImges(image) {
     return image.map(img => {
         return `<li class="gallery-item">
-    <a class="gallery-link" href="large-image.jpg">
+    <a class="gallery-link" href=${img.original}>
         <img class="gallery-image" src=${img.preview} data-source=${img.original} alt=${img.description} />
     </a>
 </li>`
@@ -68,14 +68,14 @@ function createImges(image) {
 
 function  handleClick(event) {
     event.preventDefault();
-    if (event.target === event.currentTarget) {
+    if (event.target.tagName !== "IMG") {
         return;
     }
 
-    const currentImg = event.target.closest(".gallery-item");
+    const currentImg = event.target.closest("IMG");
     console.log(currentImg);
 
-   const largeImgSrc = event.target.dataset.source;
+    const largeImgSrc = event.target.dataset.source;
 
     const clickedImage = images.find(img => img.original === largeImgSrc);
 
